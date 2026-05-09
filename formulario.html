@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha de Ingreso</title>
+
+    <link rel="stylesheet" href="form-.css">
+</head>
+<body>
+
+    <div class="contenedor">
+
+        <!-- Logo -->
+        <img src="logo-thunder.jpg" class="logo">
+
+        <h1>Ficha de Ingreso</h1>
+
+        <form id="formulario" novalidate>
+
+            <!-- Nombre -->
+            <div class="campo">
+                <label>Nombre completo</label>
+
+                <input type="text" id="nombre" placeholder="Escribe tu nombre">
+
+                <small class="mensaje-error"></small>
+            </div>
+
+            <!-- Apellido -->
+            <div class="campo">
+                <label>Apellido</label>
+
+                <input type="text" id="apellido" placeholder="Escribe tu apellido">
+
+                <small class="mensaje-error"></small>
+            </div>
+
+            <!-- Edad -->
+            <div class="campo">
+                <label>Edad</label>
+
+                <input type="number" min="1" max="100" placeholder="Tu edad">
+
+                <small class="mensaje-error"></small>
+            </div>
+
+            <!-- Fecha -->
+            <div class="campo">
+                <label>Fecha de nacimiento</label>
+
+                <input 
+                type="text" 
+                id="fecha"
+                placeholder="Ingresa tu fecha de nacimiento"
+                onfocus="(this.type='date')"
+                onblur="if(this.value==''){this.type='text'}">
+
+                <button type="button" class="fecha-btn" onclick="ponerFecha()">
+                    Fecha actual
+                </button>
+
+                <small class="mensaje-error"></small>
+            </div>
+
+            <!-- Sexo -->
+            <div class="campo">
+                <label>Sexo</label>
+
+                <select>
+                    <option value="">Selecciona</option>
+                    <option>Masculino</option>
+                    <option>Femenino</option>
+                </select>
+
+                <small class="mensaje-error"></small>
+            </div>
+
+            <!-- Teléfono -->
+            <div class="campo">
+                <label>Teléfono</label>
+
+                <input type="tel" placeholder="Número telefónico">
+
+                <small class="mensaje-error"></small>
+            </div>
+
+            <!-- Correo -->
+            <div class="campo campo-completo">
+                <label>Correo electrónico</label>
+
+                <input type="email" placeholder="correo@gmail.com">
+
+                <small class="mensaje-error"></small>
+            </div>
+
+            <!-- Escuela -->
+            <div class="campo campo-completo">
+                <label>Escuela de procedencia</label>
+
+                <input type="text" placeholder="Nombre de tu escuela">
+
+                <small class="mensaje-error"></small>
+            </div>
+
+            <!-- Nacionalidad -->
+            <div class="campo">
+                <label>Nacionalidad</label>
+
+                <input type="text" placeholder="Tu nacionalidad">
+
+                <small class="mensaje-error"></small>
+            </div>
+
+            <!-- Estado civil -->
+            <div class="campo">
+                <label>Estado civil</label>
+
+                <select>
+                    <option value="">Selecciona</option>
+                    <option>Soltero(a)</option>
+                    <option>Casado(a)</option>
+                    <option>Divorciado(a)</option>
+                    <option>Viudo(a)</option>
+                </select>
+
+                <small class="mensaje-error"></small>
+            </div>
+
+            <!-- Dirección -->
+            <div class="campo campo-completo">
+                <label>Dirección</label>
+
+                <textarea placeholder="Escribe tu dirección"></textarea>
+
+                <small class="mensaje-error"></small>
+            </div>
+
+            <!-- Curso -->
+            <div class="campo">
+                <label>Curso</label>
+
+                <select>
+                    <option value="">Selecciona</option>
+                    <option>Tecnológias de la Información y Comunicación</option>
+                    <option>Intervención en la Educación Obligatoria</option>
+                </select>
+
+                <small class="mensaje-error"></small>
+            </div>
+
+            <!-- Turno -->
+            <div class="campo">
+                <label>Turno</label>
+
+                <select>
+                    <option value="">Selecciona</option>
+                    <option>Matutino</option>
+                    <option>Vespertino</option>
+                </select>
+
+                <small class="mensaje-error"></small>
+            </div>
+
+            <!-- Botones -->
+            <div class="botones">
+                <button type="submit">Guardar</button>
+                <button type="reset">Limpiar</button>
+            </div>
+
+        </form>
+
+    </div>
+
+    <script>
+
+        // Botón de fecha actual
+        function ponerFecha(){
+
+            let hoy = new Date();
+
+            let año = hoy.getFullYear();
+            let mes = String(hoy.getMonth() + 1).padStart(2,'0');
+            let dia = String(hoy.getDate()).padStart(2,'0');
+
+            document.getElementById("fecha").type = "date";
+            document.getElementById("fecha").value = `${año}-${mes}-${dia}`;
+        }
+
+        // Validación personalizada
+        const formulario = document.getElementById("formulario");
+
+        formulario.addEventListener("submit", function(e){
+
+            e.preventDefault();
+
+            let valido = true;
+
+            const campos = document.querySelectorAll("input, select, textarea");
+
+            campos.forEach(campo => {
+
+                let mensaje = campo.parentElement.querySelector(".mensaje-error");
+
+                if(campo.value.trim() === ""){
+
+                    campo.style.border = "2px solid red";
+
+                    mensaje.textContent = "Por favor completa este campo";
+
+                    valido = false;
+
+                }else{
+
+                    campo.style.border = "2px solid green";
+
+                    mensaje.textContent = "";
+
+                }
+
+            });
+
+            if(valido){
+
+                alert("Formulario enviado correctamente");
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
